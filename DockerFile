@@ -1,0 +1,17 @@
+# Use PHP with Apache (includes built-in web server)
+FROM php:8.1-apache
+
+# Copy app files to the web directory
+COPY . /var/www/html
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Ensure necessary PHP extensions are installed (adjust based on your app needs)
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Expose port 80 (Apache default)
+EXPOSE 80
+
+# Start Apache in foreground mode
+CMD ["apache2-foreground"]
